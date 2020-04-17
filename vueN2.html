@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(emp,index)in emps">
+                <span>{{ emp.eName}}</span>
+                <span>{{ emp.pay}}</span>
+                <button @click="del(index)">删除</button>
+                <button @click="increase(index)">加工资</button>
+            </li>
+        </ul>
+        <button @click="add">添加</button>
+    </div>
+</body>
+<script>
+    var vm =new Vue({
+        data(){
+            return {
+                emps:[{eName:"王志珊",pay:10020},
+                {eName:"李珊勇",pay:9800},
+                {eName:"陈武宁",pay:9820}]
+            }
+        },
+        methods: {
+            del(index){this.emps.splice(index,1);},
+            increase(index){++this.emps[index].pay;},
+            add(){this.emps.push({eName:'林世仁',pay:5555});}
+        }
+    }).$mount("#app");
+</script>
+</html>

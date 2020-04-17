@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-for="(emp,index)in pageEmps">
+            <span>{{pageIndex-1)*pageSize+index+1}}、</span>
+            <span v-for="(value,key) in emp">
+                {{key}}:{{value}}
+            </span>
+        </div>
+        <button :disabled="pageIndex<=1" @click="--pageIndex">上一页</button>
+        <button :disabled="pageIndex>pageCount-1" @click="++pageIndex">下一页</button>
+    </div>
+</body>
+<script>
+    var vm=new Vue({
+        data () {
+            return {
+                pageIndex:1,pageSize:4,
+                emps:[{ eName: "王志珊", pay: 10020 }, { eName: "李山勇", pay: 9800 }, { eName: "陈武宁", pay: 9820 },
+{ eName: "肖玉玲", pay: 10025 }, { eName: "刘永波", pay: 9805 }, { eName: "张晓红", pay: 9825 },
+{ eName: "彭太华", pay: 10023 }, { eName: "史义进", pay: 9803 }, { eName: "赵怡丽", pay: 9823 },
+{ eName: "蒋四妍", pay: 9645 }]
+            }
+        },
+        computed: {
+            pageCount(){
+                return(this.emps.length + this.pageSize - 1)/this.pageSize;
+            },
+            pageEmps(){
+                return this.emps.slice((this.pageIndex-1)*this.pageSize+1,this.pageIndex*this.pageSize+1)
+            }
+        }
+    }).$mount("#app");
+</script>
+</html>

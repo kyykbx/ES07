@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <dl>
+            <template v-for="(province,index) in citys">
+                <dt>{{index+1}},{{province.pName}}</dt>
+                <dd>
+                    <div v-for="(city,i) in province.citys">
+                        {{i+1}}.{{city.cName}}
+                    </div>
+                </dd>
+            </template>
+        </dl>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+         data(){
+             return{
+                 citys:[{pName:"广东",citys:[{cName:'广州'},{cName:'深圳'}]},
+                 {pName:"湖南",citys:[{cName:'长沙'},{cName:'朗州'}]}]
+             }
+         }
+    }).$mount("#app");
+</script>
+</html>
